@@ -6,10 +6,14 @@ namespace Bank
     {   //atributos da classe
         private readonly string m_customerName;
         private double m_balance;
+        public const string DebitAmountExceedsBalanceMessage = "Debit Amount exceeds balance";
+        public const string DebitAmountLessThanZeroMessage = "Debit Amount is less than zero";
 
         //construtores da classe
         public BankAccount() { } //BankAccount ba = new BankAccount();
         public BankAccount(string customerName, double balance)
+
+        
         {
             m_customerName = customerName;
             m_balance = balance;
@@ -30,13 +34,13 @@ namespace Bank
         {
             if (amount > m_balance)
             {
-                throw new ArgumentOutOfRangeException("amount");
+                throw new System.ArgumentOutOfRangeException("amount", amount, DebitAmountExceedsBalanceMessage);
             }
             if (amount < 0)
             {
-                throw new ArgumentOutOfRangeException("amount");
+                throw new System.ArgumentOutOfRangeException("amount", amount, DebitAmountLessThanZeroMessage);
             }
-            m_balance += amount;
+            m_balance -= amount;
         }
         public void Credit(double amount)
         {
